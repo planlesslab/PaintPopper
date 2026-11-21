@@ -30,26 +30,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
   /* ---------- Planless Lab page header ---------- */
-  .pl-nav, .pl-head, .pl-foot {
-    --pl-bg: #eef0ff; --pl-ink: #1c2155; --pl-muted: #4b517f; --pl-blue: #4452ee; --pl-line: #d5d9f7;
-    --pl-display: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
-    --pl-body: "Figtree", "Segoe UI", system-ui, sans-serif;
-    box-sizing: border-box;
-  }
-  .pl-nav *, .pl-head *, .pl-foot * { box-sizing: border-box; }
-  .pl-head, .pl-foot { background: var(--pl-bg); }
-  .pl-nav a:focus-visible, .pl-head a:focus-visible, .pl-foot a:focus-visible { outline: 3px solid #ff6b57; outline-offset: 3px; }
-
-  .pl-nav { position: sticky; top: 0; z-index: 20; background: rgba(238, 240, 255, 0.88);
-    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--pl-line); }
-  .pl-in { max-width: 1100px; margin: 0 auto; padding: 0.8rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; }
-  .pl-brand { font: 800 1.3rem var(--pl-display); letter-spacing: -0.02em; text-decoration: none; white-space: nowrap; color: var(--pl-ink); }
-  .pl-nav ul { flex: 1; min-width: 0; display: flex; gap: 0.2rem; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; }
-  .pl-nav ul::-webkit-scrollbar { display: none; }
-  .pl-nav ul li:first-child { margin-left: auto; }
-  .pl-nav ul a { display: block; padding: 0.4rem 0.85rem; border-radius: 99px; font: 600 1rem var(--pl-body); text-decoration: none; color: var(--pl-muted); white-space: nowrap; }
-  .pl-nav ul a:hover { background: #e3e6ff; color: var(--pl-ink); }
-  .pl-nav ul a[aria-current="page"] { color: var(--pl-ink); }
+  <script src="https://planlesslab.github.io/home/nav.js"></script>
 
   .pl-head { width: 100%; margin: 0; font-family: var(--pl-body); color: var(--pl-ink);
     padding: clamp(2rem, 5vw, 3.5rem) max(1.5rem, calc((100% - 1100px) / 2 + 1.5rem)) clamp(2.5rem, 6vw, 4rem); }
