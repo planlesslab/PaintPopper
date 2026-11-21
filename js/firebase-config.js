@@ -1,11 +1,12 @@
 // Paste your Firebase web config here (Project settings → Your apps → Web app).
 // Keep the word `export`. While apiKey still starts with "YOUR", the game runs in local demo mode.
 export const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "YOUR_PROJECT",
-  storageBucket: "YOUR_PROJECT.firebasestorage.app",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID",
+  apiKey: "AIzaSyA7hBwVy7VsdmJssjJAwkNF53bHuzTCow4",
+  authDomain: "paintpopper.firebaseapp.com",
+  databaseURL: "https://paintpopper-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "paintpopper",
+  storageBucket: "paintpopper.firebasestorage.app",
+  messagingSenderId: "894880185496",
+  appId: "1:894880185496:web:8a9e35543ef2ad307624ed",
+  measurementId: "G-82MKCGTZL1"
 };
