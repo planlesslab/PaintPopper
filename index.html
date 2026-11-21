@@ -1,107 +1,243 @@
-# 🎈 Paint Popper
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#fff6ea" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="description" content="Paint Popper is a 30-second multiplayer party game. Pick a spot, pump your paint balloon and POP it to splash your colour across a shared canvas. Most visible paint wins!" />
+  <title>Paint Popper – Splashy Multiplayer Party Game for Friends</title>
+  <meta property="og:title" content="Paint Popper – Splashy Multiplayer Party Game for Friends" />
+  <meta property="og:description" content="Pick. Pump. POP. Repeat! 30 seconds, one shared canvas, a whole lot of paint chaos." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Paint Popper",
+    "description": "Paint Popper is a multiplayer party game for phones. Players pump paint balloons and pop them on one shared canvas. Newer paint covers older paint, and the player with the most visible paint after 30 seconds wins.",
+    "genre": ["Party game", "Arcade game"],
+    "gamePlatform": ["Mobile web browser", "Web browser"],
+    "playMode": "MultiPlayer",
+    "url": "https://planlesslab.github.io/Paint-Popper/",
+    "publisher": { "@type": "Organization", "name": "Planless Lab" }
+  }
+  </script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cellipse cx='50' cy='42' rx='30' ry='34' fill='%23ff3b5c'/%3E%3Cpath d='M44 78h12l-6-6z' fill='%23ff3b5c'/%3E%3Cellipse cx='40' cy='30' rx='6' ry='10' fill='%23fff' fill-opacity='.6'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/style.css" />
 
-**Pick. Pump. POP. Repeat!** 30 seconds. One shared canvas. A whole lot of paint chaos.
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  /* ---------- Planless Lab page header ---------- */
+  .pl-nav, .pl-head, .pl-foot {
+    --pl-bg: #eef0ff; --pl-ink: #1c2155; --pl-muted: #4b517f; --pl-blue: #4452ee; --pl-line: #d5d9f7;
+    --pl-display: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
+    --pl-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+    box-sizing: border-box;
+  }
+  .pl-nav *, .pl-head *, .pl-foot * { box-sizing: border-box; }
+  .pl-head, .pl-foot { background: var(--pl-bg); }
+  .pl-nav a:focus-visible, .pl-head a:focus-visible, .pl-foot a:focus-visible { outline: 3px solid #ff6b57; outline-offset: 3px; }
 
-A party game for phones. Everyone joins a room and gets their own paint colour. When the countdown ends:
+  .pl-nav { position: sticky; top: 0; z-index: 20; background: rgba(238, 240, 255, 0.88);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--pl-line); }
+  .pl-in { max-width: 1100px; margin: 0 auto; padding: 0.8rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; }
+  .pl-brand { font: 800 1.3rem var(--pl-display); letter-spacing: -0.02em; text-decoration: none; white-space: nowrap; color: var(--pl-ink); }
+  .pl-nav ul { flex: 1; min-width: 0; display: flex; gap: 0.2rem; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; }
+  .pl-nav ul::-webkit-scrollbar { display: none; }
+  .pl-nav ul li:first-child { margin-left: auto; }
+  .pl-nav ul a { display: block; padding: 0.4rem 0.85rem; border-radius: 99px; font: 600 1rem var(--pl-body); text-decoration: none; color: var(--pl-muted); white-space: nowrap; }
+  .pl-nav ul a:hover { background: #e3e6ff; color: var(--pl-ink); }
+  .pl-nav ul a[aria-current="page"] { color: var(--pl-ink); }
 
-1. **Pick** 📍 Tap the canvas to place your paint balloon.
-2. **Pump** 🎈 Keep tapping to blow it up. The bigger it gets, the bigger the splash. At max size it bursts by itself, and that splash still counts.
-3. **POP** 💥 Hit the big POP button to splash your colour.
-4. **Repeat** 🔁 Until the 30 seconds are up.
+  .pl-head { width: 100%; margin: 0; font-family: var(--pl-body); color: var(--pl-ink);
+    padding: clamp(2rem, 5vw, 3.5rem) max(1.5rem, calc((100% - 1100px) / 2 + 1.5rem)) clamp(2.5rem, 6vw, 4rem); }
+  .pl-back { display: inline-block; font: 600 1rem var(--pl-body); color: var(--pl-muted); text-decoration: none; margin-bottom: 1.4rem; }
+  .pl-back:hover { color: var(--pl-ink); text-decoration: underline; }
+  .pl-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .pl-tag { font: 600 0.95rem var(--pl-body); color: var(--pl-blue); background: #e3e6ff; border-radius: 8px; padding: 0.2rem 0.65rem; }
+  .pl-head h1 { font: 800 clamp(3rem, 8vw, 4.6rem)/1 var(--pl-display); letter-spacing: -0.035em; margin: 0.9rem 0 0.6rem; color: var(--pl-ink); }
+  .pl-sub { font: 500 clamp(1.4rem, 3vw, 1.9rem)/1.25 var(--pl-display); letter-spacing: -0.01em; margin: 0; color: var(--pl-ink); }
+  .pl-cols { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; margin-top: clamp(1.8rem, 4vw, 2.6rem); }
+  .pl-desc p { margin: 0 0 1.1rem; color: var(--pl-muted); font-size: 1.15rem; line-height: 1.6; max-width: 60ch; }
 
-Newer paint covers older paint, so territory can always be stolen. When the timer hits zero, painting stops, and the player with the most **visible** paint wins.
+  .pl-facts { margin: 0; background: #fbfbff; border: 1px solid var(--pl-line); border-radius: 22px; padding: 1.25rem 1.4rem; display: grid; gap: 0.7rem; }
+  .pl-icon { display: flex; justify-content: center; margin: 0.4rem 0 1.2rem; }
+  .pl-icon img, .pl-icon svg { display: block; max-width: 120px; max-height: 120px; }
+  .pl-facts dl { margin: 0; display: grid; gap: 0.7rem; }
+  .pl-facts dl div { display: grid; grid-template-columns: 7.2rem 1fr; gap: 1rem; align-items: baseline; }
+  .pl-facts dt { color: var(--pl-muted); font: 600 0.95rem var(--pl-body); }
+  .pl-facts dd { margin: 0; color: var(--pl-ink); font: 600 1.05rem/1.35 var(--pl-body); }
 
-- **Join by room code, invite link or QR code**
-- **One shared canvas** that everyone sees live, including other players' balloons as they pump them
-- **Fair scoring**: every phone builds the same splats from the same data, in the same order, so everyone sees the same canvas and the same scores
-- **Podium** with each player's % of the canvas and a picture of the final canvas
-- **Host handover**: if the host drops out for a minute, the next player takes over
-- **No build step**: plain HTML, CSS and JavaScript, hosted free on GitHub Pages with Firebase for live sync
+  .pl-foot { width: 100%; margin: 0; border-top: 1px solid var(--pl-line); padding: 2rem 1.5rem; text-align: center; color: var(--pl-muted); font: 400 0.95rem var(--pl-body); }
+  .pl-foot p { margin: 0.3rem 0; }
+  .pl-foot a { color: inherit; }
+  .pl-foot .pl-suggest { color: var(--pl-ink); font-weight: 600; }
 
-## Try it right now (no setup)
+  @media (max-width: 820px) {
+    .pl-cols { grid-template-columns: 1fr; }
+    .pl-facts dl div { grid-template-columns: 6.6rem 1fr; }
+  }
+</style>
+</head>
+<body data-view="home">
+<nav class="pl-nav" aria-label="Main"><div class="pl-in">
+  <a class="pl-brand" href="https://planlesslab.github.io/home/">Planless Lab</a>
+  <ul>
+    <!-- Put aria-current="page" on THIS project's link only -->
+    <li><a href="https://planlesslab.github.io/WeBringo/">WeBringo</a></li>
+    <li><a href="https://planlesslab.github.io/ChaoticParty/">ChaoticParty</a></li>
+    <li><a href="https://planlesslab.github.io/Bauble-Shake/">Bauble-Shake</a></li>
+    <li><a href="https://planlesslab.github.io/Paint-Popper/" aria-current="page">Paint Popper</a></li>
+  </ul>
+</div></nav>
+<script>
+  (function () {
+    var cur = document.querySelector('.pl-nav a[aria-current="page"]');
+    var ul = cur && cur.closest("ul");
+    if (ul && ul.scrollWidth > ul.clientWidth) ul.scrollLeft = cur.parentNode.offsetLeft - ul.offsetLeft - 8;
+  })();
+</script>
 
-Until you add a Firebase config, the game runs in **local demo mode**: a yellow bar shows at the top, and players sync between tabs on one device.
+<header class="pl-head">
+  <a class="pl-back" href="https://planlesslab.github.io/home/">&larr; All projects</a>
+  <div class="pl-tags"><span class="pl-tag">Party game</span><span class="pl-tag">30 seconds</span></div>
+  <h1>Paint Popper 🎈</h1>
+  <p class="pl-sub">Pick. Pump. POP. Repeat!</p>
 
-```bash
-cd paint-popper
-python3 -m http.server 8000
-# open http://localhost:8000 in two or more tabs
-```
+  <div class="pl-cols">
+    <div class="pl-desc">
+      <p>30 seconds. One shared canvas. A whole lot of paint chaos. Tap a spot, pump your paint balloon and pop it to splash your colour everywhere.</p>
+      <p>Bigger balloons make bigger splashes but take longer to pump. Newer paint covers older paint, so nobody's territory is safe. When the timer hits zero, the most visible paint wins!</p>
+    </div>
 
-## Set up Firebase (about 5 minutes, free)
+    <div class="pl-facts">
+      <div class="pl-icon">
+        <svg viewBox="0 0 120 120" width="120" height="120" aria-hidden="true">
+          <rect width="120" height="120" rx="24" fill="#fffdf8"/>
+          <circle cx="34" cy="80" r="22" fill="#2f6bff"/><circle cx="18" cy="96" r="5" fill="#2f6bff"/><circle cx="58" cy="100" r="4" fill="#2f6bff"/>
+          <circle cx="84" cy="88" r="18" fill="#ffc21a"/><circle cx="104" cy="70" r="4" fill="#ffc21a"/>
+          <ellipse cx="62" cy="44" rx="22" ry="25" fill="#ff3b5c"/><path d="M57 71h10l-5-5z" fill="#ff3b5c"/>
+          <ellipse cx="54" cy="34" rx="5" ry="8" fill="#fff" fill-opacity=".6"/>
+        </svg>
+      </div>
+      <dl>
+        <div><dt>Category</dt><dd>Party games</dd></div>
+        <div><dt>Players</dt><dd>2–12</dd></div>
+        <div><dt>Play format</dt><dd>In-person, Virtual, Hybrid</dd></div>
+        <div><dt>Device</dt><dd>Mobile / Web</dd></div>
+        <div><dt>Round length</dt><dd>30 seconds</dd></div>
+        <div><dt>Game type</dt><dd>Competitive / Tapping</dd></div>
+      </dl>
+    </div>
+  </div>
+</header>
 
-Use a **new Firebase project** for Paint Popper rather than your Bauble Shake one. The database rules are different for each game.
+  <div class="scene" aria-hidden="true">
+    <i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><i class="blob b4"></i><i class="blob b5"></i>
+  </div>
 
-1. Go to <https://console.firebase.google.com> and click **Add project**. You don't need Analytics.
-2. Go to **Build → Authentication → Get started → Sign-in method → Anonymous** and click **Enable**.
-3. Go to **Build → Realtime Database → Create database**. Pick a region, then choose **Start in locked mode**.
-4. Open the database's **Rules** tab. Delete what's there, paste in everything from [`database.rules.json`](database.rules.json), and click **Publish**.
-5. Go to **Project settings (⚙) → Your apps** and click the **Web (`</>`)** icon. Register an app (you don't need Firebase Hosting). When it shows the setup code, choose **"Use a `<script>` tag"**. Copy just the values (`apiKey`, `authDomain` and so on) into [`js/firebase-config.js`](js/firebase-config.js), replacing the `YOUR_…` placeholders. Keep the word `export` at the start.
-   - Make sure `databaseURL` is filled in. If Firebase didn't give you one, copy the address from the top of the Realtime Database page.
-6. Go to **Authentication → Settings → Authorized domains** and add `YOUR-USERNAME.github.io`.
+  <div id="mode-banner" class="banner" hidden></div>
 
-The web config is meant to be public, so committing it is fine. The database rules control who can write what.
+  <main id="app">
+    <!-- HOME -->
+    <section id="view-home" class="view">
+      <h1 class="logo">Paint<br /><span>Popper</span></h1>
+      <p class="tagline">Pick. Pump. POP. Repeat!</p>
+      <div class="card">
+        <div id="invite-head" class="invite-head" hidden>
+          <p class="eyebrow">Join room</p>
+          <div id="invite-code" class="room-code small"></div>
+        </div>
+        <label for="name-input">Your name</label>
+        <input id="name-input" maxlength="16" autocomplete="nickname" placeholder="e.g. Picasso" />
+        <button id="invite-join-btn" class="btn primary" hidden>Join the game</button>
+        <button id="create-btn" class="btn primary">Create a room</button>
+        <div id="join-divider" class="divider"><span>or join one</span></div>
+        <div id="join-row" class="row">
+          <input id="code-input" maxlength="4" placeholder="CODE" autocapitalize="characters" autocomplete="off" spellcheck="false" />
+          <button id="join-btn" class="btn">Join</button>
+        </div>
+        <p id="home-error" class="error" role="alert"></p>
+      </div>
+    </section>
 
-## Put it on GitHub Pages
+    <!-- LOBBY -->
+    <section id="view-lobby" class="view" hidden>
+      <div class="card lobby-card">
+        <p class="eyebrow">Room code</p>
+        <div id="room-code" class="room-code">----</div>
+        <div id="qr" class="qr"></div>
+        <button id="share-btn" class="btn small">Share invite link</button>
+        <p id="share-note" class="note"></p>
+      </div>
 
-1. Create a new repository on GitHub, for example `Paint-Popper`.
-2. Upload all the files in this folder, including the hidden `.nojekyll` file. You can drag and drop them onto the repository page, or push with git:
-   ```bash
-   cd paint-popper
-   git init && git add -A && git commit -m "Paint Popper"
-   git branch -M main
-   git remote add origin https://github.com/YOUR-USERNAME/Paint-Popper.git
-   git push -u origin main
-   ```
-3. On GitHub, go to **Settings → Pages → Build and deployment**. Choose **Deploy from a branch**, branch `main`, folder `/ (root)`, and click **Save**.
-4. After a minute or two, the game is live at `https://YOUR-USERNAME.github.io/Paint-Popper/`.
+      <div class="card">
+        <div class="my-colour">
+          <span id="my-dot" class="big-dot"></span>
+          <div><p class="eyebrow">Your colour</p><strong id="my-colour-name">…</strong></div>
+        </div>
+        <ol class="steps">
+          <li><b>Pick</b> Tap the canvas to place your balloon.</li>
+          <li><b>Pump</b> Keep tapping to blow it up. Too big and it bursts by itself!</li>
+          <li><b>POP</b> Hit the POP button to splash your paint.</li>
+          <li><b>Repeat</b> Most visible paint after 30 seconds wins.</li>
+        </ol>
+      </div>
 
-If you use a different repository name, update the Paint Popper link in the nav and the `url` in the `ld+json` block near the top of `index.html`.
+      <div class="card">
+        <p class="eyebrow"><span id="player-count">0</span> in the room</p>
+        <ul id="player-list" class="player-list"></ul>
+        <button id="start-btn" class="btn primary" hidden disabled>Start game</button>
+        <p id="lobby-wait" class="note center">Waiting for the host to start…</p>
+      </div>
+      <button id="leave-btn" class="btn ghost">Leave room</button>
+    </section>
 
-## How a game goes
+    <!-- GAME (shared canvas) -->
+    <section id="view-game" class="view game" hidden>
+      <div class="hud">
+        <div class="chip" id="hud-me"><span id="hud-dot" class="dot"></span><span id="hud-pct">0%</span></div>
+        <div class="chip timer" id="hud-time">30.0</div>
+      </div>
+      <div id="cover-bar" class="cover-bar"></div>
+      <div id="stage" class="stage">
+        <div id="canvas-wrap" class="canvas-wrap">
+          <canvas id="paint"></canvas>
+          <canvas id="fx"></canvas>
+          <div id="countdown" class="countdown" hidden></div>
+          <div id="overlay-msg" class="overlay-msg" hidden></div>
+        </div>
+      </div>
+      <div class="controls">
+        <p id="hint" class="hint">Tap the canvas to place your balloon</p>
+        <button id="pop-btn" class="pop-btn" disabled>
+          <i id="pop-meter" class="pop-meter"></i>
+          <span>POP!</span>
+        </button>
+      </div>
+    </section>
 
-1. The host taps **Create a room** and shares the code, link or QR code.
-2. Everyone enters a name and joins. Each player sees their colour in the lobby (Cherry, Blueberry, Sunshine…).
-3. The host taps **Start game**. After 3‑2‑1, paint!
-4. The podium appears about 1.5 seconds after time runs out. The host can start another round with **Play again**, and everyone stays in the room.
+    <!-- RESULTS -->
+    <section id="view-results" class="view" hidden>
+      <h2 class="results-title">Results</h2>
+      <p id="winner-line" class="winner-line"></p>
+      <canvas id="final" class="final"></canvas>
+      <div id="podium" class="podium"></div>
+      <ol id="rest-list" class="rest-list"></ol>
+      <button id="again-btn" class="btn primary" hidden>Play again</button>
+      <p id="again-wait" class="note center">Waiting for the host…</p>
+      <button id="leave-btn-2" class="btn ghost">Leave room</button>
+    </section>
+  </main>
 
-On a computer, click the canvas to place and pump, **Space** to pump and **Enter** to pop.
+  <footer class="pl-foot">
+  <p class="pl-suggest">Got an idea for a real-world experience? <a href="https://planlesslab.github.io/home/">Suggest an experience</a></p>
+  <p>Planless Lab · IRL Experience Lab</p>
+</footer>
 
-Up to 12 people can paint at once, one per colour. Anyone beyond that, or anyone who joins mid-round, watches the canvas live and plays next round.
-
-## Troubleshooting
-
-- **The yellow "Local demo mode" bar shows on the live site:** the Firebase config isn't in use yet. Check that `js/firebase-config.js` has your real values (no `YOUR_…` left), then commit and push it.
-- **Invite links end in `&local`:** that link was made while the site was in demo mode. Once the config is live, share a fresh link from the lobby.
-- **"Couldn't connect to the game server":** check that Anonymous sign-in is enabled (step 2) and your `github.io` domain is authorised (step 6).
-- **Players can join but splats don't appear for others:** the rules weren't published, or they're the Bauble Shake rules. Paste `database.rules.json` again and click **Publish**.
-
-## Tuning
-
-| What | Where |
-|---|---|
-| Round length, countdown, pump speed limit | top of `js/main.js` (`TIME_LIMIT_MS`, `COUNTDOWN_MS`, `PUMP_COOLDOWN_MS`) |
-| Max balloon size, splat size, splat shape | `js/paint.js` (`MAX_LEVEL`, `splatRadius`, `splatCircles`) |
-| The 12 paint colours and their names | `PALETTE` in `js/paint.js` |
-| Page colours, buttons, fonts | `css/style.css` |
-
-Pumping is capped at about 11 pumps a second, so auto-clickers or super-fast tappers get no advantage.
-
-## Project layout
-
-```
-index.html               screens (home, lobby, game, results) + Planless Lab header
-css/style.css            bright, splashy styling
-js/main.js               game flow, rooms, input, rendering
-js/paint.js              splat shapes, shared canvas, coverage scoring, balloons, effects
-js/backend-firebase.js   Firebase Realtime Database adapter
-js/backend-local.js      same API over localStorage for local demo mode
-js/firebase-config.js    your Firebase web config
-database.rules.json      security rules to paste into Firebase
-.nojekyll                tells GitHub Pages to serve the files as they are
-```
-
-## Known limitations
-
-- Each splat's time comes from the player's phone, checked against the server clock. A determined cheater could fake splats, so it's built for friendly games, not tournaments.
-- Old rooms are never deleted. Each room is small, so the free tier covers a lot of play, but you can clear `rooms` in the Firebase console whenever you like.
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js" defer></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
